@@ -17,15 +17,19 @@ function buildMetadata(sample) {
 
 function buildCharts(sample) {
  
-    d3.json("samples.json").then(function(data) {
-      // Filter the data for the object with the correct sample number
-      object = data.samples.filter(function(objects) {
-        objects.id==sample})[0];
-      console.log(object);
+    // d3.json("samples.json").then(function(data) {
+    //   // Filter the data for the object with the correct sample number
+    //   object = data.samples.filter(function(objects) {
+    //     objects.id==sample})[0];
+    //   console.log(object);
+    d3.json("samples.json").then((data) => {
+      var samples = data.samples;
+      var resultArray = samples.filter(sampleObj => sampleObj.id == sample);
+      var result = resultArray[0];
 
-      let sample_values = object.sample_values
-      let otu_ids = object.otu_ids
-      let otu_labels = object.otu_labels
+      let sample_values = result.sample_values;
+      let otu_ids = result.otu_ids;
+      let otu_labels = result.otu_labels;
       
 
       // Build a Bubble Chart
